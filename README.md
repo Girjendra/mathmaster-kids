@@ -88,7 +88,6 @@ git clone https://github.com/your-username/math-practice-app.git
 
 
 ## 🙌 Author
-
 ### **Girjendra**
 Android Developer (Beginner → Growing 🚀)
 
