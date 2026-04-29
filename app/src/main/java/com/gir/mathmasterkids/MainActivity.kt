@@ -13,6 +13,7 @@ import androidx.core.view.WindowInsetsCompat
 class MainActivity : AppCompatActivity() {
     var correctAnswer = 0
     var score = 0
+    var level = 1
     lateinit var timer: CountDownTimer
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -45,8 +46,18 @@ class MainActivity : AppCompatActivity() {
                 resultText.text = "Wrong ❌"
             }
 
+            if (score >= 5) {
+                level = 2
+            }
+            if (score >= 10) {
+                level = 3
+            }
+
             val scoreText = findViewById<TextView>(R.id.scoreText)
             scoreText.text = "Score: $score"
+
+            val levelText = findViewById<TextView>(R.id.levelText)
+            levelText.text = "Level: $level"
 
             timer.cancel()
             startTimer()
@@ -58,8 +69,15 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun generateQuestion() {
-        val a = (0..9).random()
-        val b = (0..9).random()
+
+        val max = when(level) {
+            1 -> 10
+            2 -> 20
+            else -> 50
+        }
+
+        val a = (0 until max).random()
+        val b = (0 until max).random()
 
         correctAnswer = a + b
 
