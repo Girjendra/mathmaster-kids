@@ -50,7 +50,7 @@ This app helps users improve their math skills through random questions, levels,
 ---
 
 ## 📂 Project Structure
-
+```bash
 MathPracticeGame
 │
 ├── java/com.gir.mathmasterkids
@@ -67,6 +67,7 @@ MathPracticeGame
 ├── correct.mp3
 └── wrong.mp3
 
+```
 
 ## ▶️ How to Run
 
@@ -79,16 +80,17 @@ git clone https://github.com/your-username/math-practice-app.git
 # Build and run on emulator or device
 ```
 
-📌 Future Improvements
-🎨 Animations & transitions
-🌍 Global leaderboard
-🎵 Background music
-📊 Progress tracking
-🙌 Author
+##  📌 Future Improvements
+- 🎨 Animations & transitions
+- 🌍 Global leaderboard
+- 🎵 Background music
+- 📊 Progress tracking
 
-Girjendra
+
+##🙌 Author
+
+### **Girjendra**
 Android Developer (Beginner → Growing 🚀)
 
-⭐ Support
-
+##⭐ Support
 If you like this project, give it a ⭐ on GitHub — it helps a lot!
