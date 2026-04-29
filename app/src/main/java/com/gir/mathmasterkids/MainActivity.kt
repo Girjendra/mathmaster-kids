@@ -70,19 +70,43 @@ class MainActivity : AppCompatActivity() {
 
     fun generateQuestion() {
 
+        val questionText = findViewById<TextView>(R.id.questionText)
+
         val max = when(level) {
             1 -> 10
             2 -> 20
             else -> 50
         }
 
-        val a = (0 until max).random()
-        val b = (0 until max).random()
+        val a = (1 until max).random()
+        val b = (1 until max).random()
 
-        correctAnswer = a + b
+        val operations = listOf("+", "-", "*", "/")
+        val op = operations.random()
 
-        val questionText = findViewById<TextView>(R.id.questionText)
-        questionText.text = "$a + $b = ?"
+        when(op) {
+
+            "+" -> {
+                correctAnswer = a + b
+                questionText.text = "$a + $b = ?"
+            }
+
+            "-" -> {
+                correctAnswer = a - b
+                questionText.text = "$a - $b = ?"
+            }
+
+            "*" -> {
+                correctAnswer = a * b
+                questionText.text = "$a × $b = ?"
+            }
+
+            "/" -> {
+                correctAnswer = b   // because (a*b)/a = b
+                val dividend = a * b
+                questionText.text = "$dividend ÷ $a = ?"
+            }
+        }
     }
 
     fun startTimer() {
