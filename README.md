@@ -87,10 +87,10 @@ git clone https://github.com/your-username/math-practice-app.git
 - 📊 Progress tracking
 
 
-##🙌 Author
+## 🙌 Author
 
 ### **Girjendra**
 Android Developer (Beginner → Growing 🚀)
 
-##⭐ Support
+## ⭐ Support
 If you like this project, give it a ⭐ on GitHub — it helps a lot!
