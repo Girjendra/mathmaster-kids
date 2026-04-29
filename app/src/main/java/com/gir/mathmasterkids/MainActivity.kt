@@ -77,14 +77,14 @@ class MainActivity : AppCompatActivity() {
 
         val questionText = findViewById<TextView>(R.id.questionText)
 
-        val max = when(level) {
-            1 -> 10
-            2 -> 20
-            else -> 50
+        val (min, max) = when(level) {
+            1 -> Pair(1, 10)
+            2 -> Pair(10, 21)
+            else -> Pair(20, 51)
         }
 
-        val a = (1 until max).random()
-        val b = (1 until max).random()
+        val a = (min until max).random()
+        val b = (min until max).random()
 
         val operations = listOf("+", "-", "*", "/")
         val op = operations.random()
