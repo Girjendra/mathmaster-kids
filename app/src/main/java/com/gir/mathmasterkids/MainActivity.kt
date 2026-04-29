@@ -12,6 +12,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import android.content.Context
+import android.content.SharedPreferences
 
 class MainActivity : AppCompatActivity() {
     var correctAnswer = 0
@@ -20,6 +21,7 @@ class MainActivity : AppCompatActivity() {
     lateinit var timer: CountDownTimer
     lateinit var correctSound: MediaPlayer
     lateinit var wrongSound: MediaPlayer
+    lateinit var sharedPref: SharedPreferences
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,6 +35,11 @@ class MainActivity : AppCompatActivity() {
 
         correctSound = MediaPlayer.create(this, R.raw.correct)
         wrongSound = MediaPlayer.create(this, R.raw.wrong)
+
+        sharedPref = getSharedPreferences("MyApp", MODE_PRIVATE)
+
+        val resetScoreBtn = findViewById<Button>(R.id.resetScoreBtn)
+        val resetLevelBtn = findViewById<Button>(R.id.resetLevelBtn)
 
         submitBtn.setOnClickListener {
             val answerInput = findViewById<EditText>(R.id.answerInput)
@@ -68,6 +75,11 @@ class MainActivity : AppCompatActivity() {
                 level = 3
             }
 
+            val editor = sharedPref.edit()
+            editor.putInt("score", score)
+            editor.putInt("level", level)
+            editor.apply()
+
             val scoreText = findViewById<TextView>(R.id.scoreText)
             scoreText.text = "Score: $score"
 
@@ -81,6 +93,28 @@ class MainActivity : AppCompatActivity() {
             answerInput.text.clear()
         }
 
+        score = sharedPref.getInt("score", 0)
+        level = sharedPref.getInt("level", 1)
+
+        val scoreText = findViewById<TextView>(R.id.scoreText)
+        val levelText = findViewById<TextView>(R.id.levelText)
+
+        scoreText.text = "⭐ Score: $score"
+        levelText.text = "🏆 Level: $level"
+
+        resetScoreBtn.setOnClickListener {
+            score = 0
+            scoreText.text = "⭐ Score: $score"
+
+            sharedPref.edit().putInt("score", score).apply()
+        }
+
+        resetLevelBtn.setOnClickListener {
+            level = 1
+            levelText.text = "🏆 Level: $level"
+
+            sharedPref.edit().putInt("level", level).apply()
+        }
     }
 
     fun generateQuestion() {
