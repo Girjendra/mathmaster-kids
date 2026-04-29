@@ -12,6 +12,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import android.content.Context
+import android.content.Intent
 import android.content.SharedPreferences
 
 class MainActivity : AppCompatActivity() {
@@ -180,6 +181,13 @@ class MainActivity : AppCompatActivity() {
 
             override fun onFinish() {
                 timerText.text = "Time's Up!"
+
+                val intent = Intent(this@MainActivity, GameOverActivity::class.java)
+                intent.putExtra("score", score)
+                intent.putExtra("highScore", highScore)
+
+                startActivity(intent)
+                finish()
             }
 
         }.start()
