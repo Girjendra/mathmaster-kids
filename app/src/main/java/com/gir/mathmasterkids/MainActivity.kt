@@ -1,7 +1,9 @@
 package com.gir.mathmasterkids
 
+import android.media.MediaPlayer
 import android.os.Bundle
 import android.os.CountDownTimer
+import android.os.Vibrator
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
@@ -9,12 +11,15 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import android.content.Context
 
 class MainActivity : AppCompatActivity() {
     var correctAnswer = 0
     var score = 0
     var level = 1
     lateinit var timer: CountDownTimer
+    lateinit var correctSound: MediaPlayer
+    lateinit var wrongSound: MediaPlayer
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -25,6 +30,9 @@ class MainActivity : AppCompatActivity() {
         startTimer()
 
         val submitBtn = findViewById<Button>(R.id.submitBtn)
+
+        correctSound = MediaPlayer.create(this, R.raw.correct)
+        wrongSound = MediaPlayer.create(this, R.raw.wrong)
 
         submitBtn.setOnClickListener {
             val answerInput = findViewById<EditText>(R.id.answerInput)
@@ -47,8 +55,10 @@ class MainActivity : AppCompatActivity() {
             if (userAnswer == correctAnswer) {
                 score++
                 resultText.text = "Correct ✅"
+                correctSound.start()
             } else {
                 resultText.text = "Wrong ❌"
+                wrongSound.start()
             }
 
             if (score >= 5) {
