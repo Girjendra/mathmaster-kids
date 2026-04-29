@@ -37,7 +37,12 @@ class MainActivity : AppCompatActivity() {
                 return@setOnClickListener
             }
 
-            val userAnswer = userAnswerText.toInt()
+            val userAnswer = userAnswerText.toIntOrNull()
+
+            if (userAnswer == null) {
+                resultText.text = "Enter valid integer!"
+                return@setOnClickListener
+            }
 
             if (userAnswer == correctAnswer) {
                 score++

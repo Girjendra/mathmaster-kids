@@ -35,7 +35,7 @@
         android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:hint="Enter Answer"
-        android:inputType="numberSigned|numberDecimal"
+        android:inputType="numberSigned"
         android:gravity="center"
         android:layout_marginBottom="20dp"/>
 
