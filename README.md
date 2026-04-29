@@ -51,29 +51,34 @@ This app helps users improve their math skills through random questions, levels,
 
 ## 📂 Project Structure
 
-```bash
 MathPracticeGame
 │
 ├── java/com.gir.mathmasterkids
-│   ├── MainActivity.kt
-│   ├── StartActivity.kt
-│   └── GameOverActivity.kt
+│ ├── MainActivity.kt
+│ ├── StartActivity.kt
+│ └── GameOverActivity.kt
 │
 ├── res/layout
-│   ├── activity_main.xml
-│   ├── activity_start.xml
-│   └── activity_game_over.xml
+│ ├── activity_main.xml
+│ ├── activity_start.xml
+│ └── activity_game_over.xml
 │
 └── res/raw
-    ├── correct.mp3
-    └── wrong.mp3
-▶️ How to Run
+├── correct.mp3
+└── wrong.mp3
+
+
+## ▶️ How to Run
+
+```bash
 # Clone the repository
 git clone https://github.com/your-username/math-practice-app.git
 
 # Open project in Android Studio
 
 # Build and run on emulator or device
+```
+
 📌 Future Improvements
 🎨 Animations & transitions
 🌍 Global leaderboard
