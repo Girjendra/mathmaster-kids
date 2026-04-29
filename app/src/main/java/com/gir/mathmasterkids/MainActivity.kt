@@ -22,6 +22,8 @@ class MainActivity : AppCompatActivity() {
     lateinit var correctSound: MediaPlayer
     lateinit var wrongSound: MediaPlayer
     lateinit var sharedPref: SharedPreferences
+    var highScore = 0
+    lateinit var highScoreText: TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,16 +32,16 @@ class MainActivity : AppCompatActivity() {
 
         generateQuestion()
         startTimer()
-
         val submitBtn = findViewById<Button>(R.id.submitBtn)
-
         correctSound = MediaPlayer.create(this, R.raw.correct)
         wrongSound = MediaPlayer.create(this, R.raw.wrong)
-
         sharedPref = getSharedPreferences("MyApp", MODE_PRIVATE)
-
         val resetScoreBtn = findViewById<Button>(R.id.resetScoreBtn)
         val resetLevelBtn = findViewById<Button>(R.id.resetLevelBtn)
+
+        highScoreText = findViewById(R.id.highScoreText)
+        highScore = sharedPref.getInt("highScore", 0)
+        highScoreText.text = "🔥 High Score: $highScore"
 
         submitBtn.setOnClickListener {
             val answerInput = findViewById<EditText>(R.id.answerInput)
@@ -63,6 +65,13 @@ class MainActivity : AppCompatActivity() {
                 score++
                 resultText.text = "Correct ✅"
                 correctSound.start()
+                if (score > highScore) {
+                    highScore = score
+                    highScoreText.text = "🔥 High Score: $highScore"
+
+                    sharedPref.edit().putInt("highScore", highScore).apply()
+                }
+
             } else {
                 resultText.text = "Wrong ❌"
                 wrongSound.start()
@@ -95,10 +104,8 @@ class MainActivity : AppCompatActivity() {
 
         score = sharedPref.getInt("score", 0)
         level = sharedPref.getInt("level", 1)
-
         val scoreText = findViewById<TextView>(R.id.scoreText)
         val levelText = findViewById<TextView>(R.id.levelText)
-
         scoreText.text = "⭐ Score: $score"
         levelText.text = "🏆 Level: $level"
 
@@ -115,10 +122,14 @@ class MainActivity : AppCompatActivity() {
 
             sharedPref.edit().putInt("level", level).apply()
         }
+
+        highScore = sharedPref.getInt("highScore", 0)
+
+        val highScoreText = findViewById<TextView>(R.id.highScoreText)
+        highScoreText.text = "🔥 High Score: $highScore"
     }
 
     fun generateQuestion() {
-
         val questionText = findViewById<TextView>(R.id.questionText)
 
         val (min, max) = when(level) {
@@ -159,7 +170,6 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun startTimer() {
-
         val timerText = findViewById<TextView>(R.id.timerText)
 
         timer = object : CountDownTimer(30000, 1000) {
