@@ -21,7 +21,6 @@ class MainActivity : AppCompatActivity() {
     var level = 1
     lateinit var timer: CountDownTimer
     lateinit var correctSound: MediaPlayer
-    lateinit var wrongSound: MediaPlayer
     lateinit var sharedPref: SharedPreferences
     var highScore = 0
     lateinit var highScoreText: TextView
@@ -35,7 +34,6 @@ class MainActivity : AppCompatActivity() {
         startTimer()
         val submitBtn = findViewById<Button>(R.id.submitBtn)
         correctSound = MediaPlayer.create(this, R.raw.correct)
-        wrongSound = MediaPlayer.create(this, R.raw.wrong)
         sharedPref = getSharedPreferences("MyApp", MODE_PRIVATE)
         val resetScoreBtn = findViewById<Button>(R.id.resetScoreBtn)
         val resetLevelBtn = findViewById<Button>(R.id.resetLevelBtn)
@@ -75,7 +73,6 @@ class MainActivity : AppCompatActivity() {
 
             } else {
                 resultText.text = "Wrong ❌"
-                wrongSound.start()
             }
 
             if (score >= 5) {
