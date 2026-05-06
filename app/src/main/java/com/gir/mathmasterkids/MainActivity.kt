@@ -3,15 +3,11 @@ package com.gir.mathmasterkids
 import android.media.MediaPlayer
 import android.os.Bundle
 import android.os.CountDownTimer
-import android.os.Vibrator
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
-import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
 
@@ -32,6 +28,7 @@ class MainActivity : AppCompatActivity() {
 
         generateQuestion()
         startTimer()
+
         val submitBtn = findViewById<Button>(R.id.submitBtn)
         correctSound = MediaPlayer.create(this, R.raw.correct)
         sharedPref = getSharedPreferences("MyApp", MODE_PRIVATE)
